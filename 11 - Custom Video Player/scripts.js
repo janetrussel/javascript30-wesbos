@@ -6,6 +6,8 @@ const progressBar = document.querySelector (".progress__filled");
 const playerButton = document.querySelector (".toggle");
 const skipButtons = document.querySelectorAll ("[data-skip]");
 const ranges = document.querySelectorAll (".player__slider");
+const full_screen = document.querySelector (".full_screen");
+const material_icons = document.querySelector (".material-icons");
 
 // Functions
 function togglePlay () {
@@ -53,6 +55,20 @@ function scrub (e) {
     video.currentTime = scrubTime;
 }
 
+function toggleScreenSize () {
+  // If full screen mode switch icon to exit fullscreen
+  if (material_icons.textContent === "fullscreen") {
+    // Set fullscreen mode.
+    material_icons.textContent = "fullscreen_exit";
+    player.classList.add ("fullscreen");
+  }
+  else {
+    // Exit full screen mode
+    player.classList.remove ("fullscreen");
+    material_icons.textContent = "fullscreen";
+  }
+}
+
 // Event Listeners
 // add event listener to the video+
 video.addEventListener ("click", togglePlay);
@@ -80,3 +96,6 @@ progress.addEventListener ('click', scrub);
 progress.addEventListener ('mousemove', (e) => mousedown && scrub (e));
 progress.addEventListener ('mousedown', () => mousedown = true);
 progress.addEventListener ('mouseup', () => mousedown = false);
+
+// Add event listener to full screen icon
+full_screen.addEventListener ('click', toggleScreenSize);

@@ -32,7 +32,11 @@ body {
   max-width: none;
   width: 100%;
 }
-
+.fullscreen
+{
+  max-width: none;
+  width:100%;
+}
 .player:-webkit-full-screen {
   max-width: none;
   width: 100%;
@@ -159,4 +163,7 @@ input[type=range]::-moz-range-thumb {
   border-radius: 50px;
   background: #ffc600;
   cursor: pointer;
+}
+.full_screen {
+  flex-grow: 0.1
 }
