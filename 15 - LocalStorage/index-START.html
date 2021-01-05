@@ -23,11 +23,17 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <div class="buttons">
+      <button type="button" class="clear-all" name="clear-all">Clear All</button>
+      <button type="button" class="check-all" name="check-all">Check All</button>
+    </div>  
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
+  const buttons = document.querySelector('.buttons');
+
   //const items = [];
   const items = JSON.parse (localStorage.getItem ("items")) || [];
 
@@ -75,8 +81,33 @@
     populateList (items, itemsList);
   }
 
+  function clearAllItems () {
+    items.forEach (item => item.done = false);
+  }
+  function checkAllItems () {
+    items.forEach (item => item.done = true);
+  }
+
+  function clickedButton (e) {
+    if (e.target.nodeName != "BUTTON")
+      return;
+    if (e.target.name === "clear-all") {
+      clearAllItems ();
+    }
+    else {
+      checkAllItems ();
+    }
+    // Update the screen
+    populateList (items, itemsList);
+    // Add items to localStorage
+    localStorage.setItem ('items', JSON.stringify (items));
+  }
+
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+
+  // add event listener to the buttons
+  buttons.addEventListener ('click', clickedButton);
 
   // get items from localStorage if items exists
   populateList (items, itemsList);
