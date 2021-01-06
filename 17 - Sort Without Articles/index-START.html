@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sort Without Articles</title>
+</head>
+<body>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #bands {
+      list-style: inside square;
+      font-size: 20px;
+      background: white;
+      width: 500px;
+      margin: auto;
+      padding: 0;
+      box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    
+    #bands li {
+      border-bottom: 1px solid #efefef;
+      padding: 20px;
+    }
+    
+    #bands li:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: #ffc600;
+      text-decoration: none;
+    }
+
+  </style>
+
+  <ul id="bands"></ul>
+
+<script>
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+function removeArticle (band) {
+  //let bandWithoutArticle = band;
+
+  // Do a case insensitive check (i) for The, An, A at the beginning of the band name.
+  // Remove The, An, A from the beginning of the name if it exists.
+  //bandWithoutArticle = bandWithoutArticle.replace (/^(The )/i, "");
+  //bandWithoutArticle = bandWithoutArticle.replace (/^(An )/i, "");
+  //bandWithoutArticle = bandWithoutArticle.replace (/^(A )/i, "");
+
+  return band.replace (/^(a |the |an )/i, "").trim ();
+}
+
+function displayBands (sortedBandsWithoutArticles, originalBands) {
+  let bandsList = document.querySelector ("#bands");
+  bandsList.innerHTML = "";
+
+  // Display the article (The, An, A) if there is one.
+  // Display the sorted list
+
+
+  sortedBandsWithoutArticles.forEach (band => {
+    let bandToDisplay = band;
+    // Check if this band has an article.  Compare with each band in the original list.
+    originalBands.forEach (originalBand => {
+      if (removeArticle (originalBand) === bandToDisplay) {
+        bandToDisplay = originalBand;
+        return;
+      }
+    });
+    bandsList.innerHTML += `<li>${bandToDisplay}</li>`;
+  });
+}
+
+const bandsWithoutArticles = bands.map (removeArticle);
+
+//Sort the bands without the articles.
+const sortedBandsWithoutArticles = bandsWithoutArticles.sort ();
+displayBands (sortedBandsWithoutArticles, bands);
+</script>
+
+</body>
+</html>
