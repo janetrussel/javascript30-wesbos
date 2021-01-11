@@ -1,0 +1,1 @@
+This geolocation (speed and direction) application required XCODE for a Mac.
