@@ -1,0 +1,1 @@
+use getBoundingClientRect to get coordinates of a link; highlight it taking into consideration scrolling on the page.
